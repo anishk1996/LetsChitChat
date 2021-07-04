@@ -1,0 +1,33 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Global Chat Application</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+        <link rel="stylesheet" href="/style.css">
+    </head>
+    <body>
+        Name: <input id="name" value="">
+        <input id="submit-btn" type="submit" value="Login">
+        <script>
+            let submit = document.querySelector('#submit-btn');
+            let inputBox = document.querySelector('#name');
+
+            inputBox.addEventListener('keyup', (event) => {
+                if (event.key === 'Enter') {
+                    let value = document.querySelector('#name').value;
+                    // value = window.btoa(value)
+                    let url = `${window.location.protocol}//${window.location.hostname}:${window.location.port}/home?u=${value}`;
+                    window.open(url, '_self');
+                }
+            });
+
+            submit.addEventListener('click', (event) => {
+                let value = document.querySelector('#name').value;
+                // value = window.btoa(value)
+                let url = `${window.location.protocol}//${window.location.hostname}:${window.location.port}/home?u=${value}`;
+                window.open(url, '_self');
+            });
+        </script>
+    </body>
+</html>
