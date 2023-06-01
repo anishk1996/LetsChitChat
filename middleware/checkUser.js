@@ -11,12 +11,13 @@ require('../models/users-v_1_0_0')
  * @return {function} Express middleware.
  */
 module.exports = async function validateUserFromDb (req, res) {
-    if (req.query && req.query['u'] !== undefined) {
-        let name = req.query['u'];
-        console.log('Login check', req.query);
+    let email = localStorage.getItem('email');
+    let password = localStorage.getItem('password');
+    if (email && password) {
         let query = {
-            'name': name
-        };
+            email: email,
+            password: password
+        }
         const db = await global.db.connect('chatApplication');
         const usersCollection = await db.model('users');
         let result = await usersCollection.find(query);
@@ -28,7 +29,7 @@ module.exports = async function validateUserFromDb (req, res) {
             return false;
         }
     } else {
-        console.log('unauthorised user');
-        return false;
+        console.log('Unauthorized user');
+        return false
     }
 }

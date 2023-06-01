@@ -5,7 +5,8 @@ const http = require('http').createServer(app);
 const PORT = process.env.PORT || 3000;
 const checkUserDb = require('./middleware/checkUser');
 const saveMessageService = require('./services/saveMessage');
-const getMessageService = require('./services/getMessage')
+const getMessageService = require('./services/getMessage');
+const saveUserDetails = require('./services/userService');
 const dbName = 'chatApplication';
 
 http.listen(PORT, () => {
@@ -17,9 +18,14 @@ dbConnection.connect();
 // Make db connection globally available
 global.db = dbConnection
 
+// routing in ui
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/login.html');
+})
+
+app.get('/register', (req, res) => {
+    res.sendFile(__dirname + '/public/register.html');
 })
 
 app.use(express.static(__dirname + '/public'))
@@ -34,12 +40,20 @@ async function authUser(req, res, next) {
     if (checkReq === true) {
         next();
     } else {
-        res.sendFile(__dirname + '/public/login.html');
+        res.sendFile(__dirname + '/public/register.html');
     }
 }
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// routing in backend
+
+
+app.post('/signup', async (req, res) => {
+    let result = await saveUserDetails.saveUserDetails(req);
+    res.send(result);
+})
 
 app.post('/saveMessage', async (req, res) => {
     let result = await saveMessageService.saveMessagesDetails(req);

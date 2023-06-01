@@ -9,6 +9,12 @@ const usersSchema = new Schema({
     id: SchemaTypes.Long,
     name: {
         type: String
+    },
+    email: {
+      type: String
+    },
+    password: {
+      type: String
     }
 }, {
     timestamps: {

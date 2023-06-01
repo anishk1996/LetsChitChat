@@ -14,7 +14,7 @@ do {
 } while(!name);
 
 document.addEventListener('DOMContentLoaded', function(event){ 
-    window.history.replaceState(null, null, window.location.pathname);
+    // window.history.replaceState(null, null, window.location.pathname);
     console.log('asdfg', urlParams.get('u'));
 });
 

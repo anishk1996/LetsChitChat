@@ -32,7 +32,7 @@ function createNewConnection(dbName) {
   console.log('connect() url=%s', url);
 
   // Get mongo options
-  const mongoOptions = { "useNewUrlParser": true }
+  const mongoOptions = { "useNewUrlParser": true, "useUnifiedTopology": true  }
 
   console.log('connect() creating a connection to %s', dbName)
   // Create & return new connection
